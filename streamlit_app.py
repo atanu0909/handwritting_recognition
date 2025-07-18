@@ -14,10 +14,7 @@ def get_model():
 # Prompt for extraction
 PROMPT = (
     "just rewrite what is in the image. "
-    "skip those lines where diagonal line passes. "
-    "Someone may have written something and then marked it cross to indicate that it need not be considered. "
-    "So, don't consider anything marked cross for processing. "
-    "Check for the diagonal end points of the crossed line and anything falling within the rectangular area of that diagonal will be considered as marked cross and it will not be considered for extraction. "
+     
 )
 
 st.title("Handwriting Extraction with Gemini")
