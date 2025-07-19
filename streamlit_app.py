@@ -14,14 +14,18 @@ genai.configure(api_key=API_KEY)
 def get_model():
     return genai.GenerativeModel('gemini-2.5-flash')
 
-# Prompt for extraction
-PROMPT = (
+
+# Default prompt for extraction
+DEFAULT_PROMPT = (
     "just rewrite what is in the image. "
-     
+    
 )
 
 st.title("Handwriting Extraction with Gemini")
 st.write("Upload an image. The app will extract text, skipping crossed-out lines.")
+
+user_prompt = st.text_area("Enter your prompt:", value=DEFAULT_PROMPT, height=120)
+
 
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 
@@ -33,7 +37,7 @@ if uploaded_file:
         model = get_model()
         with st.spinner("Processing..."):
             try:
-                response = model.generate_content([PROMPT, image])
+                response = model.generate_content([user_prompt, image])
                 st.success("Extracted Text:")
                 st.write(response.text)
             except Exception as e:
