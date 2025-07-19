@@ -16,10 +16,7 @@ def get_model():
 
 
 # Default prompt for extraction
-DEFAULT_PROMPT = (
-    "just rewrite what is in the image. "
-    
-)
+DEFAULT_PROMPT = "just rewrite what is in the image. Preserve the original line breaks and formatting exactly as shown."
 
 st.title("Handwriting Extraction with Gemini")
 st.write("Upload an image. The app will extract text, skipping crossed-out lines.")
@@ -39,7 +36,7 @@ if uploaded_file:
             try:
                 response = model.generate_content([user_prompt, image])
                 st.success("Extracted Text:")
-                st.write(response.text)
+                st.code(response.text, language=None)
             except Exception as e:
                 st.error(f"Error: {e}")
 
